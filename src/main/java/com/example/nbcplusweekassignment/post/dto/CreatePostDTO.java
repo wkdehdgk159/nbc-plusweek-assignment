@@ -16,7 +16,7 @@ public class CreatePostDTO {
 
     @Builder
     public record Response(Long postId, String title, String contents,
-                           String nickname, LocalDateTime created_at) {
+                           String nickname, LocalDateTime createdDate) {
 
         public static Response of(Post post, String nickname) {
 
@@ -25,7 +25,7 @@ public class CreatePostDTO {
                     .title(post.getTitle())
                     .contents(post.getContents())
                     .nickname(nickname)
-                    .created_at(post.getCreated_at())
+                    .createdDate(post.getCreatedDate())
                     .build();
         }
     }

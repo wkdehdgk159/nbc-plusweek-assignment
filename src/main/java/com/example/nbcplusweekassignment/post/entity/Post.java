@@ -1,6 +1,6 @@
 package com.example.nbcplusweekassignment.post.entity;
 
-import com.example.nbcplusweekassignment.global.auditing.AuditingBaseEntity;
+import com.example.nbcplusweekassignment.global.auditing.BaseTimeEntity;
 import com.example.nbcplusweekassignment.post.dto.CreatePostDTO;
 import com.example.nbcplusweekassignment.user.entity.User;
 import jakarta.persistence.Column;
@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post extends AuditingBaseEntity {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

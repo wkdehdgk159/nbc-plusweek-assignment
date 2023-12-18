@@ -12,13 +12,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class AuditingBaseEntity {
+public class BaseTimeEntity {
 
     @CreatedDate
     @Column
-    private LocalDateTime created_at;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column
-    private LocalDateTime modified_at;
+    private LocalDateTime modifiedDate;
 }

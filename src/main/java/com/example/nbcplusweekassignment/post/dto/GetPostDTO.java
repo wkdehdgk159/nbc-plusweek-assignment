@@ -9,16 +9,16 @@ public class GetPostDTO {
 
     @Builder
     public record Response(Long postId, String title, String contents,
-                           String nickname, LocalDateTime created_at) {
+                           String nickname, LocalDateTime createdDate) {
 
-        public static GetPostDTO.Response of(Post post, String nickname) {
+        public static GetPostDTO.Response of(Post post) {
 
-            return GetPostDTO.Response.builder()
+            return Response.builder()
                     .postId(post.getId())
                     .title(post.getTitle())
                     .contents(post.getContents())
-                    .nickname(nickname)
-                    .created_at(post.getCreated_at())
+                    .nickname(post.getUser().getNickname())
+                    .createdDate(post.getCreatedDate())
                     .build();
         }
     }
