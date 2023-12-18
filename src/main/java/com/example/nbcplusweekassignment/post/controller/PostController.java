@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,9 +34,12 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GetPostListDTO.Response>> getAllPosts() {
+    public ResponseEntity<List<GetPostListDTO.Response>> getAllPosts(
+            @RequestParam("page") int pageNum,
+            @RequestParam("key") String key,
+            @RequestParam(value = "sortBy",required = false) String sortBy) {
 
-        List<GetPostListDTO.Response> responseDTOs = postService.getAllPosts();
+        List<GetPostListDTO.Response> responseDTOs = postService.getAllPosts(pageNum, key, sortBy);
 
         return ResponseEntity.ok(responseDTOs);
     }

@@ -14,6 +14,9 @@ import com.example.nbcplusweekassignment.user.repository.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +38,19 @@ public class PostService {
         return Response.of(post, post.getUser().getNickname());
     }
 
-    public List<GetPostListDTO.Response> getAllPosts() {
+    //작성자명 오름차순
+    public List<GetPostListDTO.Response> getAllPosts(int pageNum, String key, String sortBy) {
 
-        List<Post> postList = postRepository.findAllByOrderByCreatedDateDesc();
+        Pageable pageable = PageRequest.of(pageNum, 5, Sort.by(key).descending());;
+        if("ASC".equals(sortBy)) {
+            pageable = PageRequest.of(pageNum, 5, Sort.by(key).ascending());
+        }
+
+        List<Post> postList = postRepository.findAll(pageable).toList();
 
         return postList.stream().map(post ->
                 GetPostListDTO.Response.of(post, post.getUser().getNickname())
         ).toList();
-
     }
 
     public GetPostDTO.Response getPost(Long id) {
