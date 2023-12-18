@@ -17,7 +17,10 @@ public enum ErrorCode {
     EMPTY_CLAIMS_JWT_EXCEPTION(400, "잘못된 형식의 JWT 토큰입니다."),
     EXPIRED_JWT_EXCEPTION(400, "기한이 만료된 JWT 토큰입니다."),
     INVALID_JWT_SIGNATURE_EXCEPTION(400, "유효하지 않은 서명의 JWT 토큰입니다"),
-    UNSUPPORTED_JWT_EXCEPTION(400, "지원하지 않는 형식의 JWT 토큰입니다.");
+    UNSUPPORTED_JWT_EXCEPTION(400, "지원하지 않는 형식의 JWT 토큰입니다."),
+
+    //Post
+    NOT_FOUND_POST_EXCEPTION(400, "해당 게시글이 존재하지 않습니다.");
 
     private final int status;
 
