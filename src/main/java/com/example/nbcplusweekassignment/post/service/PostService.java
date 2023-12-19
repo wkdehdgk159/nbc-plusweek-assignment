@@ -75,4 +75,16 @@ public class PostService {
 
         return ModifyPostDTO.Response.of(post);
     }
+
+    @Transactional
+    public void deletePost(Long id, Long userId) {
+
+        Post post = postRepository.findById(id).orElseThrow(NotFoundPostException::new);
+
+        if(!post.getUser().getId().equals(userId)) {
+            throw new NotAuthorException();
+        }
+
+        postRepository.delete(post);
+    }
 }
