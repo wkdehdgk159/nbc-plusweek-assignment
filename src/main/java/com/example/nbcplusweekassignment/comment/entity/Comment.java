@@ -38,4 +38,8 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
+    public void modifyComment(String contents) {
+        this.contents = contents;
+    }
+
 }
