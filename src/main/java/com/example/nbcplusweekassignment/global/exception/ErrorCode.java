@@ -22,6 +22,9 @@ public enum ErrorCode {
     //Post
     NOT_FOUND_POST_EXCEPTION(400, "해당 게시글이 존재하지 않습니다."),
 
+    //Comment
+    NOT_FOUND_COMMENT_EXCEPTION(400, "해당 댓글이 존재하지 않습니다."),
+
     //Common
     NOT_AUTHOR_EXCEPTION(400, "해당 내용의 작성자가 아닙니다.");
 
