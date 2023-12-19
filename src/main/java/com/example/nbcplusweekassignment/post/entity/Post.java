@@ -2,6 +2,7 @@ package com.example.nbcplusweekassignment.post.entity;
 
 import com.example.nbcplusweekassignment.global.auditing.BaseTimeEntity;
 import com.example.nbcplusweekassignment.post.dto.CreatePostDTO;
+import com.example.nbcplusweekassignment.post.dto.ModifyPostDTO;
 import com.example.nbcplusweekassignment.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,4 +43,10 @@ public class Post extends BaseTimeEntity {
         this.contents = requestDTO.contents();
         this.user = user;
     }
+
+    public void modifyPost(ModifyPostDTO.Request requestDTO) {
+        this.title = requestDTO.title();
+        this.contents = requestDTO.contents();
+    }
+
 }

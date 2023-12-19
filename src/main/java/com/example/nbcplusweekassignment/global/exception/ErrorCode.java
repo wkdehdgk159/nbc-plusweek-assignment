@@ -20,7 +20,10 @@ public enum ErrorCode {
     UNSUPPORTED_JWT_EXCEPTION(400, "지원하지 않는 형식의 JWT 토큰입니다."),
 
     //Post
-    NOT_FOUND_POST_EXCEPTION(400, "해당 게시글이 존재하지 않습니다.");
+    NOT_FOUND_POST_EXCEPTION(400, "해당 게시글이 존재하지 않습니다."),
+
+    //Common
+    NOT_AUTHOR_EXCEPTION(400, "해당 내용의 작성자가 아닙니다.");
 
     private final int status;
 

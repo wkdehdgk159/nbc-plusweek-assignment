@@ -1,5 +1,6 @@
 package com.example.nbcplusweekassignment.post.service;
 
+import com.example.nbcplusweekassignment.global.exception.common.NotAuthorException;
 import com.example.nbcplusweekassignment.global.exception.post.NotFoundPostException;
 import com.example.nbcplusweekassignment.global.exception.user.NotFoundUserException;
 import com.example.nbcplusweekassignment.post.dto.CreatePostDTO;
@@ -7,18 +8,18 @@ import com.example.nbcplusweekassignment.post.dto.CreatePostDTO.Request;
 import com.example.nbcplusweekassignment.post.dto.CreatePostDTO.Response;
 import com.example.nbcplusweekassignment.post.dto.GetPostDTO;
 import com.example.nbcplusweekassignment.post.dto.GetPostListDTO;
+import com.example.nbcplusweekassignment.post.dto.ModifyPostDTO;
 import com.example.nbcplusweekassignment.post.entity.Post;
 import com.example.nbcplusweekassignment.post.repository.PostRepository;
 import com.example.nbcplusweekassignment.user.entity.User;
 import com.example.nbcplusweekassignment.user.repository.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +59,20 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(NotFoundPostException::new);
 
         return GetPostDTO.Response.of(post);
+    }
+
+    @Transactional
+    public ModifyPostDTO.Response modifyPost(Long id, ModifyPostDTO.Request requestDTO, Long userId) {
+
+        Post post = postRepository.findById(id).orElseThrow(NotFoundPostException::new);
+
+        //변경하려는 사용자가 게시글의 글쓴이와 동일한 지 비교
+        if(!post.getUser().getId().equals(userId)) {
+            throw new NotAuthorException();
+        }
+
+        post.modifyPost(requestDTO);
+
+        return ModifyPostDTO.Response.of(post);
     }
 }

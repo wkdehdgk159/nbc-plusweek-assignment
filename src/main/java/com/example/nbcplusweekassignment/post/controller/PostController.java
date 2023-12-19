@@ -4,12 +4,14 @@ import com.example.nbcplusweekassignment.global.security.UserDetailsImpl;
 import com.example.nbcplusweekassignment.post.dto.CreatePostDTO;
 import com.example.nbcplusweekassignment.post.dto.GetPostDTO;
 import com.example.nbcplusweekassignment.post.dto.GetPostListDTO;
+import com.example.nbcplusweekassignment.post.dto.ModifyPostDTO;
 import com.example.nbcplusweekassignment.post.service.PostService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +50,16 @@ public class PostController {
     public ResponseEntity<GetPostDTO.Response> getPost(@PathVariable Long id) {
 
         GetPostDTO.Response responseDTO = postService.getPost(id);
+
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ModifyPostDTO.Response> modifyPost(@PathVariable Long id,
+            @RequestBody ModifyPostDTO.Request requestDTO,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        ModifyPostDTO.Response responseDTO = postService.modifyPost(id, requestDTO, userDetails.user().getId());
 
         return ResponseEntity.ok(responseDTO);
     }
