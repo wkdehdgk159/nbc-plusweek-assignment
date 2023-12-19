@@ -74,7 +74,7 @@ public class PostService {
         String title = requestDTO.title();
         String contents = requestDTO.contents();
 
-        post.modifyPost(requestDTO.title(), requestDTO.contents());
+        post.modifyPost(title, contents);
 
         return ModifyPostDTO.Response.of(post);
     }

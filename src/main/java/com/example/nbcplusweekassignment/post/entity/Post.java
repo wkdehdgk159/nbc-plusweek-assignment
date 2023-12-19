@@ -38,12 +38,6 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    public Post(CreatePostDTO.Request requestDTO, User user) {
-        this.title = requestDTO.title();
-        this.contents = requestDTO.contents();
-        this.user = user;
-    }
-
     public void modifyPost(String title, String contents) {
         this.title = title;
         this.contents = contents;
