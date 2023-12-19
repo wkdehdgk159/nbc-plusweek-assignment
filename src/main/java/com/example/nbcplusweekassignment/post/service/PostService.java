@@ -33,7 +33,7 @@ public class PostService {
 
         User user = userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
 
-        Post post = new Post(requestDTO, user);
+        Post post = requestDTO.toEntity(user);
         postRepository.save(post);
 
         return Response.of(post, post.getUser().getNickname());
@@ -71,7 +71,10 @@ public class PostService {
             throw new NotAuthorException();
         }
 
-        post.modifyPost(requestDTO);
+        String title = requestDTO.title();
+        String contents = requestDTO.contents();
+
+        post.modifyPost(requestDTO.title(), requestDTO.contents());
 
         return ModifyPostDTO.Response.of(post);
     }

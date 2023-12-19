@@ -16,16 +16,16 @@ public class ModifyPostDTO {
 
     @Builder
     public record Response(Long postId, String title, String contents,
-                           String nickname, LocalDateTime createdDate) {
+                           String nickname, LocalDateTime modifiedDate) {
 
         public static ModifyPostDTO.Response of(Post post) {
 
-            return ModifyPostDTO.Response.builder()
+            return Response.builder()
                     .postId(post.getId())
                     .title(post.getTitle())
                     .contents(post.getContents())
                     .nickname(post.getUser().getNickname())
-                    .createdDate(post.getCreatedDate())
+                    .modifiedDate(post.getModifiedDate())
                     .build();
         }
     }

@@ -44,9 +44,9 @@ public class Post extends BaseTimeEntity {
         this.user = user;
     }
 
-    public void modifyPost(ModifyPostDTO.Request requestDTO) {
-        this.title = requestDTO.title();
-        this.contents = requestDTO.contents();
+    public void modifyPost(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 
 }
