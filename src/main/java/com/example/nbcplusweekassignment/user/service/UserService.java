@@ -82,4 +82,9 @@ public class UserService {
 
         return user;
     }
+
+    public User findUserById(Long userId) {
+
+        return userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
+    }
 }

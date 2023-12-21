@@ -9,12 +9,10 @@ import com.example.nbcplusweekassignment.comment.entity.Comment;
 import com.example.nbcplusweekassignment.comment.repository.CommentRepository;
 import com.example.nbcplusweekassignment.global.exception.comment.NotFoundCommentException;
 import com.example.nbcplusweekassignment.global.exception.common.NotAuthorException;
-import com.example.nbcplusweekassignment.global.exception.post.NotFoundPostException;
-import com.example.nbcplusweekassignment.global.exception.user.NotFoundUserException;
 import com.example.nbcplusweekassignment.post.entity.Post;
-import com.example.nbcplusweekassignment.post.repository.PostRepository;
+import com.example.nbcplusweekassignment.post.service.PostService;
 import com.example.nbcplusweekassignment.user.entity.User;
-import com.example.nbcplusweekassignment.user.repository.UserRepository;
+import com.example.nbcplusweekassignment.user.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -29,15 +27,16 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    private final PostRepository postRepository;
+    private final PostService postService;
 
     public CreateCommentDTO.Response createComment(Long postId, CreateCommentDTO.Request requestDTO,
             Long userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
-        Post post = postRepository.findById(postId).orElseThrow(NotFoundPostException::new);
+        User user = userService.findUserById(userId);
+        Post post = postService.findPostById(postId);
+        //이것 자체를 Post 내에
 
         Comment comment = requestDTO.toEntity(post, user);
 
